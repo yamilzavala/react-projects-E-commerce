@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { Navbar, Sidebar, Footer } from '../components'
 import { AboutPage, AuthWrapper, CartPage, CheckoutPage, ErrorPage, HomePage, PrivateRoute, ProductsPage, SingleProductPage } from '../pages'
 
+// Router
 const  WrapperRouter = () => {
     return (
         <Router>
@@ -33,6 +34,7 @@ const  WrapperRouter = () => {
     )
 } 
 
+//Provider
 const WrapperRouterProvider = ({children}) => {
     return (
         <WrapperRouter>

@@ -7,8 +7,11 @@ import { links } from '../utils/constants'
 import CartButtons from './CartButtons'
 import { useProductsContext } from '../context/products_context'
 import { useUserContext } from '../context/user_context'
+import { useGLobalContext } from '../context/global_context'
 
 const Nav = () => {
+  const {openSidebar} = useGLobalContext()
+  
   return (
     <NavContainer>
       <div className="nav-center" >
@@ -19,7 +22,7 @@ const Nav = () => {
           </Link>
 
           {/* toggle button */}
-          <button type="button" className="nav-toggle">
+          <button type="button" className="nav-toggle" onClick={openSidebar}>
             <FaBars/>
           </button>
 

@@ -8,7 +8,14 @@ import { FilterProvider } from './context/filter_context';
 import { CartProvider } from './context/cart_context';
 import { UserProvider } from './context/user_context';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { GLobalContextProvider } from './context/global_context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(<App />);
+root.render(
+    <GLobalContextProvider>
+        <ProductsProvider>
+            <App />
+        </ProductsProvider>
+    </GLobalContextProvider>
+);

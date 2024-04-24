@@ -1,12 +1,10 @@
 import WrapperRouterProvider from './router/WrapperRouter'
 
 function App() {
-  return (
-    <>
+  return (    
       <WrapperRouterProvider>
 
-      </WrapperRouterProvider>
-    </>
+      </WrapperRouterProvider>   
   )
 }
 

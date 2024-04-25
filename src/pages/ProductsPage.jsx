@@ -6,11 +6,12 @@ import { useProductsContext } from '../context/products_context'
 const ProductsPage = () => {
   const {products, products_loading, products_error} = useProductsContext();
 
-  if(products_loading) return <h1>Loading...</h1>
-  if(products_error) return <h1>There was an error....</h1>
+  // if(products_loading) return <h1>Loading...</h1>
+  // if(products_error) return <h1>There was an error....</h1>
 
   return <Wrapper>  
-    {products.map(product => {
+    products
+    {/* {products.map(product => {
         const {id, name, price, image, company, category, description, shipping} = product;
         return (
           <article key={id} className="products">
@@ -19,7 +20,7 @@ const ProductsPage = () => {
             <span>${price}</span>
           </article>
         )
-    })}
+    })} */}
   </Wrapper>
 }
 

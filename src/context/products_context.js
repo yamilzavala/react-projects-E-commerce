@@ -18,6 +18,9 @@ const initialState = {
   products_error: false,
   products: [],
   featured_products: [],
+  single_product_loading: false,
+  single_product_error: false,
+  single_product: {}
 }
 
 //context
@@ -38,12 +41,24 @@ export const ProductsProvider = ({ children }) => {
       console.log(error)
     }
   }
+
+  const fetchSingleProduct = async (url) => {
+    dispatch({type: GET_SINGLE_PRODUCT_BEGIN})
+    try {
+      const resp = await axios.get(url)
+      const singleProduct = resp.data;
+      dispatch({type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct})
+    } catch (error) {
+      dispatch({type: GET_SINGLE_PRODUCT_ERROR})
+    }
+  }
   
   useEffect(() => {
     fetchProducts(url)
   },[])
 
   const valuesToShare = {
+    fetchSingleProduct,
     ...state
   }
 

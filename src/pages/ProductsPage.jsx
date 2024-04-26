@@ -6,25 +6,18 @@ import { useProductsContext } from '../context/products_context'
 const ProductsPage = () => {
   const {products, products_loading, products_error} = useProductsContext();
 
-  // if(products_loading) return <h1>Loading...</h1>
-  // if(products_error) return <h1>There was an error....</h1>
-
-  return <Wrapper>  
-    products
-    <div className="products">
-      
-    </div>
-    {/* {products.map(product => {
-        const {id, name, price, image, company, category, description, shipping} = product;
-        return (
-          <article key={id} className="products">
-            <img src={image} alt={name} />
-            <span>{name}</span>
-            <span>${price}</span>
-          </article>
-        )
-    })} */}
-  </Wrapper>
+  return <main>
+    <PageHero title="Products" />  
+    <Wrapper className="page">
+      <div className="section-center products">
+        <Filters/>
+        <div>
+          <Sort/>
+          <ProductList products={products} /> 
+        </div>
+      </div>
+    </Wrapper>
+  </main>
 }
 
 const Wrapper = styled.div`

@@ -1,3 +1,4 @@
+import { filterBy } from '../utils/helpers'
 import {
   LOAD_PRODUCTS,
   SET_LISTVIEW,
@@ -15,6 +16,33 @@ const filter_reducer = (state, action) => {
       ...state,
       all_products: [...action.payload],
       filtered_products: [...action.payload],
+    }
+  }
+  if(action.type === SET_GRIDVIEW) {
+    return {
+      ...state,
+      grid_view: true,
+      list_view: false
+    }
+  }
+  if(action.type === SET_LISTVIEW) {
+    return {
+      ...state,
+      grid_view: false,
+      list_view: true
+    }
+  }
+  if(action.type === UPDATE_SORT) {
+    return {
+      ...state,
+      sort: action.payload
+    }
+  }
+  if(action.type === SORT_PRODUCTS) {
+    const {sort, filtered_products} = state;
+    return {
+      ...state,
+      filtered_products: [...filterBy(sort, [...filtered_products])]
     }
   }
   throw new Error(`No Matching "${action.type}" - action type`)

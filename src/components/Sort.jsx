@@ -1,9 +1,43 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useFilterContext } from '../context/filter_context'
 import { BsFillGridFill, BsList } from 'react-icons/bs'
-import styled from 'styled-components'
+import styled from 'styled-components';
+
+const listSortByOptions = [
+  'name(A-Z)', 
+  'name(Z-A)', 
+  'price(Lowest)', 
+  'price(Highest)'
+]
+
 const Sort = () => {
-  return <h4>sort </h4>
+  // const [sort, setSort] = useState(listSortByOptions[0])
+  const {setGridView, setListView, filtered_products, grid_view, list_view, updateSort, sort} = useFilterContext()
+  const amount_filtered_products = filtered_products.length;
+
+  return <Wrapper>
+    {/* buttons */}
+    <div className="btn-container">      
+      <button type='button' className={grid_view ? 'active' : null} onClick={setGridView}>
+        <BsFillGridFill/>
+      </button>
+      <button type='button' className={list_view ? 'active' : null} onClick={setListView}>
+        <BsList/>
+      </button>
+    </div>
+    {/* count products */}
+    <p>{amount_filtered_products} products found</p>
+    <hr />
+    {/* sort by */}
+    <form>
+      <label htmlFor="sortBy">Sort by</label>
+      <select name='sort' className='sort-input' onChange={updateSort} value={sort}>
+        {listSortByOptions.map((value, idx) => (
+          <option key={idx} value={value}>{value}</option>
+        ))}
+      </select>
+    </form>
+  </Wrapper>
 }
 
 const Wrapper = styled.section`

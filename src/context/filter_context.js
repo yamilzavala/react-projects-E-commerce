@@ -14,7 +14,10 @@ import { useProductsContext } from './products_context'
 
 const initialState = {
   all_products: [],
-  filtered_products: []
+  filtered_products: [],
+  grid_view: false,
+  list_view: true, 
+  sort: 'name(A-Z)'
 }
 
 //context
@@ -25,12 +28,37 @@ export const FilterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const {products} = useProductsContext()
 
+  const setGridView = () => {
+    dispatch({type: SET_GRIDVIEW})
+  }
+
+  const setListView = () => {
+    dispatch({type: SET_LISTVIEW})
+  }
+
+  const updateSort = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    dispatch({type:UPDATE_SORT, payload: value})
+  }
+
   useEffect(() => {
     dispatch({type: LOAD_PRODUCTS, payload: products})
   }, [products])
 
+  useEffect(() => {
+    dispatch({type: SORT_PRODUCTS})
+  }, [products, state.sort])
+
+  const valuesToShare = {
+    setGridView,
+    setListView,
+    updateSort,
+    ...state
+  }
+
   return (
-    <FilterContext.Provider value='filter context'>
+    <FilterContext.Provider value={valuesToShare}>
       {children}
     </FilterContext.Provider>
   )

@@ -1,4 +1,4 @@
-import { filterBy } from '../utils/helpers'
+import { filterBy, orderBy } from '../utils/helpers'
 import {
   LOAD_PRODUCTS,
   SET_LISTVIEW,
@@ -11,11 +11,21 @@ import {
 } from '../actions'
 
 const filter_reducer = (state, action) => {
+  // let maxPrice;
+  // if(action.payload) {
+  //   maxPrice = Math.max(...action.payload.map(product => product.price))
+  // } 
+ 
   if(action.type === LOAD_PRODUCTS) {
     return {
       ...state,
       all_products: [...action.payload],
       filtered_products: [...action.payload],
+      filters: {
+         ...state.filters,
+         max_price: 30000,//maxPrice,
+         price: 30000, //maxPrice,
+      }
     }
   }
   if(action.type === SET_GRIDVIEW) {
@@ -40,9 +50,37 @@ const filter_reducer = (state, action) => {
   }
   if(action.type === SORT_PRODUCTS) {
     const {sort, filtered_products} = state;
+    const tempProducts = [...filtered_products]
     return {
       ...state,
-      filtered_products: [...filterBy(sort, [...filtered_products])]
+      filtered_products: orderBy(sort, tempProducts)
+    }
+  }
+  if(action.type === FILTER_PRODUCTS) {
+    return {...state}
+    // const {sort, filtered_products} = state;
+    // const tempProducts = [...filtered_products]
+    // return {
+    //   ...state,
+    //   filtered_products: orderBy(sort, tempProducts)
+    // }
+  }
+  if(action.type === UPDATE_FILTERS) {   
+    const {name, value} = action.payload;
+    return {
+      ...state,
+      filters: {
+        ...state.filters,
+        [name]: value
+      }
+    }
+  }
+  if(action.type === CLEAR_FILTERS) { 
+    return {
+      ...state,
+      filters: {
+        ...action.payload.filters
+      }
     }
   }
   throw new Error(`No Matching "${action.type}" - action type`)

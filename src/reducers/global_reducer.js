@@ -17,7 +17,6 @@ const global_reducer = (state, action) => {
             isSidebarOpen: false
         }
     } 
-   return state
    throw new Error(`No Matching "${action.type}" - action type`)
 }
   

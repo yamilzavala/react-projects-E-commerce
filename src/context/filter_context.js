@@ -17,7 +17,17 @@ const initialState = {
   filtered_products: [],
   grid_view: false,
   list_view: true, 
-  sort: 'name(A-Z)'
+  sort: 'name(A-Z)',
+  filters: {
+    text: '',
+    category: 'all',
+    company: 'all',
+    color: 'all',
+    min_price: 0,
+    max_price: 0,
+    price: 0,
+    freeShipping: false
+  }
 }
 
 //context
@@ -37,9 +47,18 @@ export const FilterProvider = ({ children }) => {
   }
 
   const updateSort = (e) => {
-    const name = e.target.name;
     const value = e.target.value;
     dispatch({type:UPDATE_SORT, payload: value})
+  }
+
+  const updateFilters = (e) => {   
+    const name = e.target.name;
+    const value = e.target.value;
+    dispatch({type:UPDATE_FILTERS, payload: {name, value}})
+  }
+
+  const clearFilters = () => {
+    dispatch({type:CLEAR_FILTERS, payload: initialState})
   }
 
   useEffect(() => {
@@ -47,13 +66,20 @@ export const FilterProvider = ({ children }) => {
   }, [products])
 
   useEffect(() => {
+    dispatch({type: FILTER_PRODUCTS})
     dispatch({type: SORT_PRODUCTS})
-  }, [products, state.sort])
+  }, [products, state.sort, state.filters])
+
+  // useEffect(() => {
+  //   dispatch({type: UPDATE_FILTERS, payload: state.filters})
+  // }, [products, state.filters])
 
   const valuesToShare = {
     setGridView,
     setListView,
     updateSort,
+    updateFilters,
+    clearFilters,
     ...state
   }
 

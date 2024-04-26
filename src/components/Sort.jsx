@@ -2,13 +2,7 @@ import React, {useState} from 'react'
 import { useFilterContext } from '../context/filter_context'
 import { BsFillGridFill, BsList } from 'react-icons/bs'
 import styled from 'styled-components';
-
-const listSortByOptions = [
-  'name(A-Z)', 
-  'name(Z-A)', 
-  'price(Lowest)', 
-  'price(Highest)'
-]
+import { listSortByOptions } from '../utils/helpers';
 
 const Sort = () => {
   // const [sort, setSort] = useState(listSortByOptions[0])

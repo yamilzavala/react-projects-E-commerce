@@ -2,12 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import heroBcg from '../assets/hero-bcg.jpeg'
-import heroBcg2 from '../assets/hero-bcg-2.jpeg'
+import heroBcg2 from '../assets/hero12.jpg'
 
 const Hero = () => {
   return <Wrapper className="section-center">
     <article className="content">
-      <h1>Desig your confort zone</h1>
+      <h1>Design your confort zone</h1>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id at ipsa nobis expedita error iusto quis similique adipisci ab eum.</p>
       <Link to='/products' className='btn hero-btn'>shop now</Link>
     </article>
@@ -64,7 +64,9 @@ const Wrapper = styled.section`
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 250px;
+      width: 300px;
+      height: 180px;
+      object-fit: cover;
       transform: translateX(-50%);
       border-radius: var(--radius);
     }

@@ -11,6 +11,9 @@ const ProductsPage = () => {
 
   return <Wrapper>  
     products
+    <div className="products">
+      
+    </div>
     {/* {products.map(product => {
         const {id, name, price, image, company, category, description, shipping} = product;
         return (

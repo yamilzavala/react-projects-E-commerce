@@ -7,6 +7,15 @@ import {
 } from '../actions'
 
 const cart_reducer = (state, action) => {
+  if(action.type === ADD_TO_CART) {
+    const {amount, price} = action.payload;
+    return {
+      ...state,
+      totalAmont: state.totalAmont + (amount * price),
+      items: [...state.items, action.payload]
+    }
+  }
+
   return state
   throw new Error(`No Matching "${action.type}" - action type`)
 }

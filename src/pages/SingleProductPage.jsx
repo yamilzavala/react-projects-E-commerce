@@ -18,7 +18,7 @@ const SingleProductPage = () => {
   const {id} = useParams();
   const {fetchSingleProduct, single_product: product, single_product_loading: loading, single_product_error: error} = useProductsContext() 
   const history = useHistory();
-  const {name, images, id: sku, stock, price, shipping, colors, category, reviews, stars, description, company} = product;
+  const {name, images, id: sku, stock, price, colors, reviews, stars, description, company} = product;
 
   useEffect(() => {
     fetchSingleProduct(`${url}${id}`)
@@ -43,7 +43,7 @@ const SingleProductPage = () => {
         <ProductImages productImages={images}/>
         <section className="content">
           <h2>{name}</h2>
-          <Stars/>
+          <Stars stars={stars} reviews={reviews}/>
           <h5 className="price">{formatPrice(price)}</h5>
           <p className="description">{description}</p>
           <p className="info">
@@ -59,7 +59,7 @@ const SingleProductPage = () => {
             {company}
           </p>
           <hr/>
-          {stock > 0 && <AddToCart/>}
+          {stock > 0 && <AddToCart product={product} />}
         </section>
       </div>
     </div>

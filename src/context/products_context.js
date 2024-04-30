@@ -33,12 +33,10 @@ export const ProductsProvider = ({ children }) => {
   const fetchProducts = async (url) => {
     dispatch({type: GET_PRODUCTS_BEGIN})
     try {
-      const resp = await axios.get(url,{ headers: { Accept: 'application/json' } })    
-      console.log(resp)
+      const resp = await axios.get(url,{ headers: { Accept: 'application/json' } })  
       dispatch({type: GET_PRODUCTS_SUCCESS, payload: resp.data})      
     } catch (error) {
-      dispatch({type: GET_PRODUCTS_ERROR})    
-      console.log(error)
+      dispatch({type: GET_PRODUCTS_ERROR})  
     }
   }
 

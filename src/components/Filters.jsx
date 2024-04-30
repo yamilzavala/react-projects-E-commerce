@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useFilterContext } from '../context/filter_context'
 import { getUniqueValues, formatPrice } from '../utils/helpers'
@@ -9,14 +9,112 @@ const Filters = () => {
     filters: { text, category, company, color, min_price, max_price, price, freeShipping },
     updateFilters,
     clearFilters,
+    all_products
   } = useFilterContext();
+
+  const categories = getUniqueValues(all_products, 'category');
+  const colors = getUniqueValues(all_products, 'colors');
+  const companies = getUniqueValues(all_products, 'company');
+
+  const clearFiltersHandler = () => {
+    clearFilters()
+  }
+
   return <Wrapper>
     <form onSubmit={e => e.preventDefault()}>
+      {/*start search input */}
       <div className="form-control">
         <input placeholder='search' name='text' type="text" className='search-input' value={text} onChange={updateFilters}/>
       </div>
-      <button type="button" className="clear-btn" onClick={clearFilters}>clear filters</button>
+      {/*end search input */}
+
+      {/*start category */}
+      <div className='form-control'>
+      <h5>category</h5>
+        {
+          categories.map((currentCategory, idx) => {
+            return (
+              <button 
+              key={idx} 
+              name='category'
+              type='button'
+              onClick={updateFilters}
+              className={category === currentCategory.toLowerCase() ? 'button active' : 'button'}
+              >
+                {currentCategory}
+              </button>
+            )
+          })
+        }
+      </div>
+      {/*end category */}
+
+      {/*start companies */}
+      <div className="form-control">
+      <h5>companies</h5>
+        <select className='company' name="company" onChange={updateFilters} value={company}>
+          {
+            companies.map((currentCompany, idx) => {
+              return (
+                <option 
+                key={idx} 
+                value={currentCompany}
+                >    
+                  {currentCompany}            
+                </option>
+              )
+            })
+          }
+        </select>
+      </div>
+      {/*end companies */}
+
+      {/*start colors */}
+      <div className="form-control">
+        <h5>colors</h5>
+        <div className="colors">
+          {
+            colors.map((currentColor, idx) => {
+              if(currentColor === 'all') return <button  name='color' data-color={currentColor} className={currentColor === color ? 'all-btn active' : 'all-btn'} onClick={updateFilters}>all</button>
+              return (
+                <button 
+                name='color'
+                key={idx} 
+                data-color={currentColor}
+                // onClick={(e) => {updateFilters({target: {name:'color', value: currentColor}})} }
+                onClick={updateFilters}
+                className={currentColor === color ? 'color-btn active' : 'color-btn'}
+                style={{backgroundColor: currentColor}}> 
+                {currentColor === color && <FaCheck/>}               
+                </button>
+              )
+            })
+          }
+        </div>
+      </div>
+      {/*end colors */}
+      
+      {/*start price */}
+      <div className="form-control">
+        <h5>price</h5>
+        <div>
+          <p>{formatPrice(price)}</p>
+          <input name='price' className='price' type="range" value={price} min={min_price} max={max_price} onChange={updateFilters}/>
+        </div>
+      </div>
+      {/*end price */}
+
+      {/*start shipping */}
+      <div className="form-control shipping">
+        <label htmlFor="freeShipping">free shipping</label>
+        <input name='freeShipping' id='freeShipping' type="checkbox" checked={freeShipping} onChange={updateFilters}/>
+      </div>
+      {/*end shipping */}      
     </form>
+
+    {/* start clear filters */}
+      <button type="button" className="clear-btn" onClick={clearFiltersHandler}>clear filters</button>
+    {/* end clear filters */}
   </Wrapper>
 }
 

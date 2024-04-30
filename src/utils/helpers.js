@@ -6,7 +6,13 @@ export const formatPrice = (value) => {
     }).format(value/100)
 }
 
-export const getUniqueValues = () => {}
+export const getUniqueValues = (data, type) => {
+    let unique = data.map(item => item[type])
+    if(type === 'colors') {
+        unique = unique.flat()
+    } 
+    return['all', ...new Set(unique)]   
+}
 
 export const orderBy = (filterValue, list) => {
     if(filterValue === 'name(A-Z)') return list.sort((a,b) => a.name.localeCompare(b.name));

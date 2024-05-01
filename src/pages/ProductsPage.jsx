@@ -13,7 +13,7 @@ const ProductsPage = () => {
         <Filters/>
         <div>
           <Sort/>
-          <ProductList products={products} /> 
+          <ProductList/> 
         </div>
       </div>
     </Wrapper>

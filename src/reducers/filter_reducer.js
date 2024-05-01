@@ -57,9 +57,14 @@ const filter_reducer = (state, action) => {
     }
   }
   if(action.type === FILTER_PRODUCTS) {
-    return {...state}
-    // const {sort, filtered_products} = state;
-    // const tempProducts = [...filtered_products]
+    const {all_products} = state;
+    let tempProducts = [...all_products];
+    tempProducts = filterBy(state.filters, tempProducts);
+    return {
+      ...state,
+      filtered_products: tempProducts
+    }
+    
     // return {
     //   ...state,
     //   filtered_products: orderBy(sort, tempProducts)

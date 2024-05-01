@@ -6,11 +6,11 @@ import { useCartContext } from '../context/cart_context'
 import AmountButtons from './AmountButtons'
 
 const AddToCart = ({product}) => {
-  const {price, colors, id, stock} = product;
+  const {colors, id, stock} = product;
   const [mainColor, setMainColor] = useState(colors[0])
   const [amount, setAmount] = useState(1);
   const {addItemToCart} = useCartContext()
-
+  console.log('stock---&', stock)
   const increase = () => {
     if(amount > stock) return;
     setAmount(amount + 1)
@@ -24,9 +24,10 @@ const AddToCart = ({product}) => {
 
   const addToCart = () => {
     const item = {
+      id,
       color: mainColor,
       amount,
-      price
+      product
     }
     addItemToCart(item)
   }
@@ -46,8 +47,8 @@ const AddToCart = ({product}) => {
 
     {/* amount */}
     <div className="btn-container">
-      <AmountButtons increase={increase} decrease={decrease} amount={amount}/>
-      <Link to='/cart' disabled={amount < 1} className='btn' onClick={addToCart}>Add to cart</Link>
+      <AmountButtons increase={increase} decrease={decrease} amount={amount} stock={stock}/>
+      <Link to='/cart' className='btn' onClick={addToCart}>Add to cart</Link>
     </div>
   </Wrapper>
 }

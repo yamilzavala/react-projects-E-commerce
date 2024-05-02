@@ -26,8 +26,6 @@ const cart_reducer = (state, action) => {
       return {
         ...state,
         cart: newCartState,
-        total_amount: state.total_amount + (amount * product.price),
-        total_items: state.total_items + amount
       }
     } else {
       const newItem = {
@@ -42,16 +40,12 @@ const cart_reducer = (state, action) => {
       return {
         ...state,
         cart: [...state.cart, newItem],
-        total_amount: state.total_amount + (amount * product.price),
-        total_items: state.total_items + amount
       }     
     }
   }
   //remove item
   if(action.type === REMOVE_CART_ITEM) {
-    const {id} = action.payload;
-    const newCartState = state.cart.filter(cartItem => cartItem.id !== id)
-    console.log('remove - newCartState: ', newCartState)
+    const newCartState = state.cart.filter(cartItem => cartItem.id !== action.payload)
     return {
       ...state,
       cart: newCartState
@@ -64,7 +58,50 @@ const cart_reducer = (state, action) => {
       cart: []
     }
   }
+  //toggle amount
+  if(action.type === TOGGLE_CART_ITEM_AMOUNT) {
+    console.log('toggle---------')
+    const {id, value} = action.payload;
+    const newCartState = state.cart.map(item => {
+      if(item.id === id) {
+        if(value === 'inc' ){
+          let newAmount = item.amount + 1;
+          if(newAmount > item.max) {
+            newAmount = item.max;
+          }
+          return {...item, amount: newAmount}
+        } 
+        if(value === 'dec' ){
+          let newAmount = item.amount - 1;
+          if(newAmount < 1) {
+            newAmount = 1;
+          }
+          return {...item, amount: newAmount}
+        }       
+      } else {
+        return item
+      }
+    })
 
+    return {
+      ...state,
+      cart: newCartState
+    }
+  }
+  //totals
+  if(action.type === COUNT_CART_TOTALS) {
+    const {total_amount, total_items} = state.cart.reduce((total, cartItem) => {
+      const {amount, price} = cartItem;
+      total.total_amount += (amount * price)
+      total.total_items += amount;
+      return total
+    }, {total_amount: 0, total_items: 0})
+    return {
+      ...state,
+      total_items,
+      total_amount
+    }
+  }
   throw new Error(`No Matching "${action.type}" - action type`)
 }
 

@@ -6,8 +6,14 @@ import { FaTrash } from 'react-icons/fa'
 import { useCartContext } from '../context/cart_context'
 const CartItem = ({image, name, color, price, amount, id}) => {
   const {removeItem, toggleAmount} = useCartContext();
-  const increase = () => {}
-  const decrease = () => {}
+
+  const increase = () => {
+    toggleAmount(id, 'inc')
+  }
+  const decrease = () => {
+    toggleAmount(id, 'dec')
+  }
+
   return <Wrapper>
     <div className="title">
       <img src={image} alt={name} />

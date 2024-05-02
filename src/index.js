@@ -18,9 +18,9 @@ root.render(
         clientId='cCtdnGR4S9JZPIJVI5GElrEU20qgWriX'          
         cacheLocation='localstorage'
         redirectUri={window.location.origin}
-        // authorizationParams={{
-        //     redirect_uri: window.location.origin
-        // }}
+        authorizationParams={{
+            redirect_uri: `${window.location.origin}/cart`,
+          }}
         >
         <UserProvider>
             <GLobalContextProvider>

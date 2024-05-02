@@ -7,9 +7,14 @@ export const UserProvider = ({ children }) => {
   const {user, isAuthenticated, isLoading, loginWithRedirect, logout} = useAuth0();
 
   useEffect(() => {
-    console.log(`user: ${user}`)
-    console.log(`isAuthenticated: ${isAuthenticated}`)
-    console.log(`isLoading: ${isLoading}`)
+    // console.log(`user: ${user}`)
+    // console.log(`isAuthenticated: ${isAuthenticated}`)
+    // console.log(`isLoading: ${isLoading}`)
+    if(isAuthenticated) {
+      setMyUser(user)
+    } else {
+      setMyUser(false)
+    }
   }, [isAuthenticated])
 
   const valuesToShare = {

@@ -10,6 +10,7 @@ import { useGLobalContext } from '../context/global_context'
 const CartButtons = () => {
   const {closeSidebar} = useGLobalContext()
   const {total_items} = useCartContext()
+  const {myUser, loginWithRedirect, logout} = useUserContext()
 
   return <Wrapper className='cart-btn-wrapper'> 
     <Link to='/cart' className='cart-btn' onClick={closeSidebar}>
@@ -19,9 +20,15 @@ const CartButtons = () => {
         <span className='cart-value'>{total_items}</span>
       </span>
     </Link>
-    <button className='auth-btn'>
+    {
+      myUser ?
+      (<button type='button' onClick={() => logout({returnTo: window.location.origin})} className='auth-btn'>
+      Logout <FaUserPlus/>
+      </button>) :
+      (   <button type='button' onClick={loginWithRedirect} className='auth-btn'>
       Login <FaUserPlus/>
-    </button>
+      </button>)
+    }
   </Wrapper>
 }
 

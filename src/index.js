@@ -16,11 +16,11 @@ root.render(
     <Auth0Provider 
         domain='dev-co0t8uigsu3befr5.us.auth0.com' 
         clientId='cCtdnGR4S9JZPIJVI5GElrEU20qgWriX'          
-        //redirectUri={window.location.origin}
-        authorizationParams={{
-            redirect_uri: window.location.origin
-        }}
         cacheLocation='localstorage'
+        redirectUri={window.location.origin}
+        // authorizationParams={{
+        //     redirect_uri: window.location.origin
+        // }}
         >
         <UserProvider>
             <GLobalContextProvider>

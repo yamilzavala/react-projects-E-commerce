@@ -5,7 +5,6 @@ import { single_product_url as url } from '../utils/constants'
 import { formatPrice } from '../utils/helpers'
 import {
   Loading,
-  Error,
   ProductImages,
   AddToCart,
   Stars,
@@ -18,10 +17,11 @@ const SingleProductPage = () => {
   const {id} = useParams();
   const {fetchSingleProduct, single_product: product, single_product_loading: loading, single_product_error: error} = useProductsContext() 
   const history = useHistory();
-  const {name, images, id: sku, stock, price, colors, reviews, stars, description, company} = product;
+  const {name, images, id: sku, stock, price, reviews, stars, description, company} = product;
 
   useEffect(() => {
     fetchSingleProduct(`${url}${id}`)
+    // eslint-disable-next-line
   }, [id])
 
   //redirec home 
@@ -31,6 +31,7 @@ const SingleProductPage = () => {
         history.push('/')
       },1000)
     }
+     // eslint-disable-next-line
   }, [error])
 
   if(loading) return <Loading/>  

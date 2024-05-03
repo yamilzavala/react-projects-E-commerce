@@ -11,6 +11,7 @@ import { useGLobalContext } from '../context/global_context'
 
 const Sidebar = () => {
   const {isSidebarOpen, closeSidebar} = useGLobalContext()
+  const {myUser: user} = useUserContext();
 
   return (
     <SidebarContainer>
@@ -33,9 +34,11 @@ const Sidebar = () => {
               </Link>
             </li>)
           })}
-          <li>
-            <Link to='/checkout' onClick={closeSidebar}>checkout</Link>
-          </li>
+          {user && (
+            <li>
+              <Link to='/checkout' onClick={closeSidebar}>checkout</Link>
+            </li>
+          )}
         </ul>
         <CartButtons/>
       </aside>    

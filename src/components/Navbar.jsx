@@ -11,7 +11,8 @@ import { useGLobalContext } from '../context/global_context'
 
 const Nav = () => {
   const {openSidebar} = useGLobalContext()
-  
+  const {myUser: user} = useUserContext();
+
   return (
     <NavContainer>
       <div className="nav-center" >
@@ -36,6 +37,11 @@ const Nav = () => {
                 </li>
               )
             })}
+            {user && (
+              <li>
+                <Link to='/checkout'>checkout</Link>
+              </li>
+            )}
           </ul>
 
           {/* cart buttons */}

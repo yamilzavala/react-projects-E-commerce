@@ -153,6 +153,18 @@ const Wrapper = styled.section`
       width: 80vw;
     }
   }
+
+  @media (max-width: 345px) {
+    form {
+      width: 95vw;    
+      padding: 5px;
+    }
+ 
+    #card-element {
+      padding: 2px;
+    }
+   
+  }
 `
 
 export default StripeCheckout

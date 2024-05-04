@@ -148,22 +148,52 @@ const Wrapper = styled.section`
       transform: rotate(360deg);
     }
   }
-  @media only screen and (max-width: 600px) {
+  /* @media only screen and (max-width: 600px) {
     form {
       width: 80vw;
     }
+  } */
+
+  @media (max-width: 270px) {
+     form {
+      width: 98vw;    
+      padding: 0;
+    } 
   }
 
-  @media (max-width: 345px) {
-    form {
+  @media (min-width: 270px) {
+     form {
       width: 95vw;    
-      padding: 5px;
-    }
- 
+      padding: 20px;
+    } 
     #card-element {
       padding: 2px;
-    }
-   
+    }   
+  }
+
+   @media (min-width: 450px) {
+    form {
+      width: 70vw;  
+      padding: 20px;    
+    } 
+  }
+
+  @media (min-width: 700px) {
+    form {
+      width: 50vw;
+      padding: 40px;
+    } 
+  }
+
+  @media (min-width: 900px) {
+    form {
+      width: 40vw;
+    } 
+  }
+  @media (min-width: 1200px) {
+    form {
+      width: 30vw;
+    } 
   }
 `
 

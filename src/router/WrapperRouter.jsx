@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Navbar, Sidebar, Footer } from '../components'
 import { AboutPage, CartPage, CheckoutPage, ErrorPage, HomePage, PrivateRoute, ProductsPage, SingleProductPage } from '../pages'
 import { useAuth0 } from '@auth0/auth0-react';
@@ -10,27 +10,21 @@ const  WrapperRouter = () => {
         <Router>
             <Navbar/>
             <Sidebar/>
-            <Switch>
-                <Route exact path="/">
-                    <HomePage/>
-                </Route>
-                <Route exact path="/about">
-                    <AboutPage/>
-                </Route>
-                <Route exact path="/cart">
-                    <CartPage/>
-                </Route>
-                <Route exact path="/products">
-                    <ProductsPage/>
-                </Route>
-                <Route exact path="/products/:id" children={<SingleProductPage/>} />
-                <PrivateRoute exact path="/checkout">
-                    <CheckoutPage/>
-                </PrivateRoute>
-                <Route path="*">
-                    <ErrorPage/>
-                </Route>
-            </Switch>
+            <Routes>
+                <Route  path="/" element={<HomePage/>} />
+                <Route  path="/about" element={<AboutPage/>} />
+                <Route  path="/cart" element={<CartPage/>} />
+                <Route  path="/products" element={<ProductsPage/>} />
+                <Route  path="/products/:id" element={<SingleProductPage/>} />
+                <Route  path="/checkout" 
+                        element={
+                            <PrivateRoute>
+                                <CheckoutPage/>    
+                            </PrivateRoute>
+                        }
+                    />
+                <Route  path="*" element={<ErrorPage/>} />
+            </Routes>
             <Footer/>
         </Router>
     )

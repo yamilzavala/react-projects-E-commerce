@@ -60,7 +60,6 @@ const cart_reducer = (state, action) => {
   }
   //toggle amount
   if(action.type === TOGGLE_CART_ITEM_AMOUNT) {
-    console.log('toggle---------')
     const {id, value} = action.payload;
     const newCartState = state.cart.map(item => {
       if(item.id === id) {

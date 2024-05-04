@@ -8,13 +8,17 @@ const CartPage = () => {
   const {cart} = useCartContext();
 
   if(cart.length < 1 ) {
-    return <Wrapper className="page-100">
-      <PageHero title="Cart"/>  
-      <div className="empty">
-        <h2>Your cart is empty</h2>
-        <Link to='/products' className="btn">Fill it</Link>
-      </div>
-    </Wrapper>
+    return (
+      <main>
+        <PageHero title="Cart"/>  
+        <Wrapper className="page">
+          <div className="empty">
+            <h2>Your cart is empty</h2>
+            <Link to='/products' className="btn">Fill it</Link>
+          </div>
+        </Wrapper>
+      </main>
+    )
   }
 
   return <main>
@@ -26,13 +30,11 @@ const CartPage = () => {
 }
 
 const Wrapper = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .empty {
-    text-align: center;
-    h2 {
-      margin-top: 5rem;
-      margin-bottom: 1rem;
-      text-transform: none;
-    }
+    text-align: center;   
   }
 `
 

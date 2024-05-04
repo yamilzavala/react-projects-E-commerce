@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useProductsContext } from '../context/products_context'
 import { single_product_url as url } from '../utils/constants'
 import { formatPrice } from '../utils/helpers'
@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom'
 const SingleProductPage = () => {
   const {id} = useParams();
   const {fetchSingleProduct, single_product: product, single_product_loading: loading, single_product_error: error} = useProductsContext() 
-  const history = useHistory();
+  const navigate = useNavigate();
   const {name, images, id: sku, stock, price, reviews, stars, description, company} = product;
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const SingleProductPage = () => {
   useEffect(() => {
     if(error) {      
       setTimeout(() => {
-        history.push('/')
+        navigate('/')
       },1000)
     }
      // eslint-disable-next-line

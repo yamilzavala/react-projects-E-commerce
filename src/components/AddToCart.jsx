@@ -10,7 +10,6 @@ const AddToCart = ({product}) => {
   const [mainColor, setMainColor] = useState(colors[0])
   const [amount, setAmount] = useState(1);
   const {addItemToCart} = useCartContext()
-  console.log('stock---&', stock)
   const increase = () => {
     if(amount > stock) return;
     setAmount(amount + 1)
